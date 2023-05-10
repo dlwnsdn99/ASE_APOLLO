@@ -1,1 +1,19 @@
+# 환경구성
+ROS2는 쉘 환경을 사용하여 작업공간(workspace)를 결합한다는 개념에 의존
+작업공간(workspace)는 ROS2로 개발 중인 시스템의 위치를 나타낸다.
+- overlay : 핵심 작업 공간
+- underlay : 후속 로컬 작업 공간
 
+새 쉘을 열 떄마다 설정 파일을 소싱하거나 쉘 시작 스크립트에 소스 명령을 한번 추가
+$ source /opt/ros/rolling/setup.bash
+
+이러한 작업을 하지 않으려면 쉘 시작 스크립트에 명령을 추가 
+echo "source /opt/ros/rolling/setup.bash" >> ~/.bashrc : 해당 경로에 파일명이 존재하지 않으면 echo 출력 내용으로 새로 파일을 생성 (이어쓰기)
+
+
+다음과 같은 명령을 사용하여 환경이 올바르게 설정되었는지를 확인 
+printenv | grep -i ROS
+------------------------------------------
+ROS_VERSION=2
+ROS_PYTHON_VERSION=3
+ROS_DISTRO=rolling
