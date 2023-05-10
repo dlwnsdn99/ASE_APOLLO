@@ -1,1 +1,12 @@
+topic은 1:n 
+#topic 데이터 게시
+$ ros2 topic echo <topic_name>
 
+# topic 메시지 type 
+$ ros2 interface show <msg type>
+
+# topic pub // topic에 직접 명령줄을 이용해서 데이터 게시
+$ ros2 topic pub <topic_name> <msg_type> '<args>' //args 인수는 yaml 구문의 실제 구조
+(option)
+-- once : 한번만 실행 
+-- rate 1 : 1Hz의 꾸준한 스트림으로 실행
