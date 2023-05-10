@@ -1,36 +1,8 @@
-#환경 구성 
-ROS2는 셀 환경을 사용하여 workspace를 결합하는 개념에 의존. workspace는 ros2로 개발 중인 시스템의 위치를 나타낸다.
-- 오버레이 : 핵심작업 공간
-- 언더레이 : 후속 로컬 작업 공간
-새 쉘을 열 떄마다 설정 파일을 소싱하거나 쉘 시작 스크립트에 소스 명령을 한번 추가해야한다. 
-$ source /opt/ros/rolling/setup.bash
-이러한 계속하지 않기 위해 쉘 시작 스크립트에 명령을 추
-$ echo "source /opt/ros/rolling/setup.bash" >> ~/.bashrc //해당 경로에 파일명이 존재하지 않으면 echo 출력 내용으로 새로 파일을 생성 (이어쓰기)
-다음과 같은 명령을 사용하여 환경이 올바르게 설정되었는지를 확인 
-$ printenv | grep -i ROS
-
-#node list 확인
-$ ros2 node list
-
-#특정 node 정보 확인
-$ ros2 node info
-
-# 노드의 실행
-$ ros2 run <package_name> <executable_name>
-
-# 노드의 리매핑 // 노드 이름, 주체 이름, 서비스 이름 등과 같은 기본 노드 속성을 사용자 정의 값에 재할당하는 것
-$ ros2 run <package_name> <executable_name> --ros-args --remap_node:=<node_name>
-
-#Topic, Service, Action, Parameter 확인 가능
-#Topic : 데이터를 publish 하고 subscribe하는 주체. 메시지를 교환하기위한 메커니즘
-#Service : Requset와 Response 메시지를 사용해 일회성 통신. 함수 호출이라 보면 된다.
-#Action : Service와 유사하지만, 요청과 응답 메시지 대신에 목표(Goal), 피드백(Feedback) 
-			#및 결과(Result) 메시지를 사용하여 장기 실행(long-running) 작업을 위한 메커니즘 
-			#액션 서버(Action Server)는 목표를 받아들이고 작업 실행 
-			#작업이 실행되는 동안 액션 클라이언트(Action Client)는 피드백을 받습니다. 
-			#작업이 완료되면 결과를 반환
-			#Parameter : Node에서 사용되는 설정 값을 저장하는 데 사용.파라미터는 런타임에 변경될 수 있으므로, 노드의 동작을 제어하거나 구성을 조정하는 데 유용합니다.
-
-#Rqt_Graph
-$ sudo apt install ros-foxy-rqt* # 설치
-$ rqt_graph
+# 1. Node 개념
+# 2. Package 개념
+# 3. Launch file (Node 방식)
+# 4. Topic 개념
+# 5. Node 프로그래밍 (C++)
+# 6. Topic 프로그래밍 (C++)
+# 7. Ros 2 Action
+# 8. Action 프로그래밍 (C++)
