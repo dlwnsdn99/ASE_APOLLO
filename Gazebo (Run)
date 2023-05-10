@@ -1,0 +1,75 @@
+# made by Jun-Gil, Kwak 
+# lasted mod : 20230510
+
+# Basic way to run Gazebo
+$ gazebo
+
+# Run Gazebo with default quadrotor
+$ cd ~/PX4-Autopilot
+$ make px4_sitl gazebo
+
+# Run Gazebo with default quadrotor and world(warehouse)
+$ make px4_sitl gazebo__warehouse
+
+# Various Models of the Gazebo
+Standard Plane : $ make px4_sitl gz_rc_cessna
+Standard VTOL : $ make px4_sitl gz_standard_vtol
+Ackerman UGV (Rover) : $ make px4_sitl gazebo-classic_rover
+Differential UGV (Rover) : $ make px4_sitl gazebo-classic_r1_rover
+...
+
+# Various World of the Gazebo(The model is assumed to be quadrotor)
+$ make px4_sitl gazebo__bayland
+$ make px4_sitl gazebo__boat
+$ make px4_sitl gazebo__warehouse
+$ make px4_sitl gazebo__sonoma_raceway
+...
+
+#If you want additional models and worlds, follow the following address.
+Model : File – Tools – simulation – gazebo – sitl_gazebo – models
+world : File – Tools – simulation – gazebo – sitl_gazebo – worlds
+
+# Run 'gazebo' using script
+http://map.esran.com/ # Access the address below to obtain latitude and longitude
+$ cd ~/PX4-Autopilot
+$ sudo apt-get install vim
+$ vi apollo #Enter the following using the 'vi' editor
+========================================================================================
+export PX4_HOME_LAT = ~
+export PX4_HOME_LON = ~
+export PX4_HOME_ALT = 0
+make px4_sitl gazebo
+========================================================================================
+$ chmod +x apollo
+$ ./apollo
+
+# how to change wind speed and wind direction
+# Follow the path below.
+File  –  PX4-Autopilot  –  Tools  –  simulation  –  gazebo-classic  –  sitl_gazebo-classic  –  worlds  – 
+empty-world (If you change the world, write to that world file)
+
+#Enter after the last <\include> and Feel free to modify it.
+========================================================================================
+<plugin name='wind_plugin' filename='libgazebo_wind_plugin.so'>
+<frameId>base_link</frameId>
+<windVelocityVariance>0</windVelocityVariance>
+<windVelocityMean>SET_YOUR_WIND_SPEED(속도 입력)</windVelocityMean>
+<windVelocityMax>20.0</windVelocityMax>
+<windGustDirectionMean>1 0 0</windGustDirectionMean>
+<windDirectionVariance>0</windDirectionVariance>
+<windGustStart>0</windGustStart>
+<windGustDuration>0</windGustDuration>
+<windGustVelocityMean>0</windGustVelocityMean>
+</plugin>
+<windGustVelocityVariance>0</windGustVelocityVariance>
+<windGustVelocityMax>20.0</windGustVelocityMax>
+<windGustDirectionVariance>0</windGustDirectionVariance>
+<windPubTopic>world_wind</windPubTopic>
+</plugin>
+========================================================================================
+# windVelocityMean = 풍속 설정(m/s)
+# windVelocityMax = windVelocityMean보다 커야함.
+# windDirectionVariance = 풍속 변화 정도
+# windDirectionMean = 풍향 설정
+# windGustStart = 돌풍을 의미(windGustVelocityMean : 풍속 / WindGustDirectionMean : 풍향)
+========================================================================================
