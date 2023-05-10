@@ -3,6 +3,7 @@ $ ros2 node list
 
 #특정 node 정보 확인
 $ ros2 node info
+
 #Topic, Service, Action, Parameter 확인 가능
 #Topic : 데이터를 publish 하고 subscribe하는 주체. 메시지를 교환하기위한 메커니즘
 #Service : Requset와 Response 메시지를 사용해 일회성 통신. 함수 호출이라 보면 된다.
