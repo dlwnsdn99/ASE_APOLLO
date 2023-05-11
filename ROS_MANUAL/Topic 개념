@@ -1,12 +1,26 @@
-topic은 1:n 
-#topic 데이터 게시
-$ ros2 topic echo <topic_name>
+ Topic = Publisher(발행자)와 Subscriber(구독자)로 나뉜 송수신자들이 전달하는 Message(데이터)가 오가는 Bus
+- topic은 1:n 
+----------------------------------------------------------------------------
+#Node 토글에 보면 node 리스트랑 형식 보는 명령어 있는데, 그거 보면 발행자 구독자 등등 다 볼 수 있음
+
+#실행중 토픽 리스트 확인
+$ ros2 topic list
+
+# 토픽 정보
+$ ros2 topic info <topic_nmae>
 
 # topic 메시지 type 
 $ ros2 interface show <msg type>
 
-# topic pub // topic에 직접 명령줄을 이용해서 데이터 게시
+#topic 데이터 게시
+$ ros2 topic echo <topic_name>
+
+#커맨드 이용해서 publish 방식은 아래 참고
 $ ros2 topic pub <topic_name> <msg_type> '<args>' //args 인수는 yaml 구문의 실제 구조
 (option)
 -- once : 한번만 실행 
 -- rate 1 : 1Hz의 꾸준한 스트림으로 실행
+(example)
+$ ros2 topic pub --rate 1 /skidbot/cmd_vel geometry_msgs/msg/Twist "{linear: {x: 0.5, y: 0.0, z: 0.0}, angular: {x: 0.0, y: 0.0, z: 1.0}}"
+$ ros2 topic pub --once  /skidbot/cmd_vel geometry_msgs/msg/Twist "{linear: {x: 0.0, y: 0.0, z: 0.0}, angular: {x: 0.0, y: 0.0, z: 0.0}}"
+
