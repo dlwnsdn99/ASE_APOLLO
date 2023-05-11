@@ -1,0 +1,12 @@
+#c++ Node 실행법
+$ cbp cpp_topic_pkg
+
+#Terminal 1
+$ ros2 launch gcamp_gazebo gcamp_world.launch.py
+$ ros2 launch 패키지명 런치파일
+
+#Terminal 2
+$ ros2 run cpp_topic_pkg cmd_vel_pub_node
+$ ros2 run 패키지명 노드명
+
+#이런식으로 launch 명령어와 run 명령어로 실행하면 된다.
