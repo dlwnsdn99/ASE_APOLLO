@@ -1,5 +1,28 @@
 # 노드의 실행
 $ ros2 run <package_name> <executable_name>
 
+#node list 확인
+$ ros2 node list
+
+#특정 node 정보 확인
+$ ros2 node info
+
 # 리매핑 //노드 이름, 주제 이름, 서비스 이름 등과 같은 기본 노드 속성을 사용자 정의 값에 재할당
 $ ros2 run <package_name> <executable_name> --ros-args --remap__node:=<node_name>
+
+
+# 시작 노드 // 1개 이상의 노드를 생성가능
+$ ros2 launch <package_name> <executable_name>
+
+executable example
+----------------------------------------
+from launch import LaunchDescription
+import launch_ros.actions
+def genenerate_launch_description():
+  return LaunchDescription([
+    launch_ros.actions.Node(
+      namespace = <node1_nmae>, package = <package_name>, executable = <excutable_name>, output = 'screen'),
+    launch_ros.actions.Node(
+      namespace = <node2_nmae>, package = <package_name>, executable = <excutable_name>, output = 'screen'),
+  ])
+  -----------------------------------------
