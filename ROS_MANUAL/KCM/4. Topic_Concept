@@ -1,0 +1,22 @@
+- Topic = Publisher(발행자)와 Subscriber(구독자)로 나뉜 송수신자들이 전달하는 Message(데이터)가 오가는 Bus
+- 여러 Node들로 부터 데이터를 받을 수 있고, 전송시 여러 Node들에게 전송도 가능함. (멀티 캐스팅 느낌인듯)
+- 정말 새로운 센서이거나, 특별한 기능의 구현이 필요할 경우, 혹은 기존의 메세지들 중 취합하여 통합된 형태를 만들고 싶다면 ⇒ 직접 새로운 메세지를 선언
+
+
+#################################################
+
+#Node 토글에 보면 node 리스트랑 형식 보는 명령어 있는데, 그거 보면 발행자 구독자 등등 다 볼 수 있음
+
+#실행중 토픽 리스트
+$ ros2 topic list
+#특정 토픽 정보
+$ ros2 topic info /skidbot/cmd_vel
+#특정 메시지 구성 아래 이거 싫으면 구글링도 가능
+$ ros2 interface show geometry_msgs/msg/Twist
+
+#커맨드 이용해서 publish 방식은 아래 참고
+$ ros2 topic pub --rate 1 /skidbot/cmd_vel geometry_msgs/msg/Twist "{linear: {x: 0.5, y: 0.0, z: 0.0}, angular: {x: 0.0, y: 0.0, z: 1.0}}"
+$ ros2 topic pub --once  /skidbot/cmd_vel geometry_msgs/msg/Twist "{linear: {x: 0.0, y: 0.0, z: 0.0}, angular: {x: 0.0, y: 0.0, z: 0.0}}"
+
+#publish 상태 확인은 echo 명령어
+$ ros2 topic echo /skidbot/cmd_vel
