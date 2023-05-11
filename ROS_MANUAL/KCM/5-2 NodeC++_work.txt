@@ -1,0 +1,35 @@
+#include "rclcpp/rclcpp.hpp"
+
+int main(int argc, char** argv)
+{
+  rclcpp::init(argc, argv);
+	// 생성된 Node는 shared_ptr!! 
+  auto node = rclcpp::Node::make_shared("simple_loop_node");
+
+  // WallRate & Rate
+  // https://qiita.com/NeK/items/bcf518f6dd79f970bb8e
+	// 숫자 2는 2Hz를 의미하며, 숫자가 커질수록 더 짧은 주기로 반복됩니다.
+  rclcpp::WallRate rate(2);
+
+	// 마치 아두이노 프로그래밍을 하듯이, 주기적으로 Node를 반복 실행시키게 됩니다.
+  while (rclcpp::ok())
+  {
+    RCLCPP_INFO(node->get_logger(), "Simple Loop Node");
+		// 해당 부분이 실질적으로 Node를 갱신하는 부분입니다.
+    // Python의 spin_once와 유사하다고 보시면 됩니다.
+    rclcpp::spin_some(node);
+		// time.sleep를 생각하시면 됩니다.
+    rate.sleep();
+  }
+
+  rclcpp::shutdown();
+  return 0;
+}
+
+/*
+	주기적 동작 필요시 timer필요.
+	1. rclcpp::WallRate ->이거 추천한다.
+	2. rclcpp::Rate
+	WallRatesms : steady_clock 기반 -> 단순히 계속해서 시간이 증가
+	Rate : system_clock 기반 -> 시스템에 부하걸리면 오차가 일어날 수 있음
+*/
