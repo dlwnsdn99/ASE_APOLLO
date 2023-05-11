@@ -1,0 +1,50 @@
+#launch 명령어 구성
+#ros2 launch <패키지 이름> <launch 파일 이름>
+$ ros2 launch gcamp_gazebo gcamp_world.launch.py
+
+#launch 파일은 <>.launch.py 형식을 취한다.
+
+############################################################
+#Node 방식
+def generate_launch_description():
+
+    turtlesim_node = Node(
+        package='turtlesim',
+        executable='turtlesim_node',
+        parameters=[],
+        arguments=[],
+        output="screen",
+    )
+
+    turtlesim_teleop_node = Node(
+        package='turtlesim',
+        executable='draw_square',
+        parameters=[],
+        arguments=[],
+        output="screen",
+    )
+
+    # create and return launch description object
+    return LaunchDescription(
+        [
+            turtlesim_node,
+            turtlesim_teleop_node,
+        ]
+    )
+#Node : Node 하나를 실행시킬 옵션
+	# package : 실행시킬 Node가 포함된 package 선택
+	# executable : c++ Node의 경우 colcon build를 하면 실행 가능한 프로그램이 생성
+								#python은 추가 작업이 필요한데 바로 이거임
+	# parameters : 실행시킬 Node의 추가 매개변수
+	# arguments, name, remappings : 여러 옵션들..
+	
+########################################
+- 다음 매개변수들을 .yaml 파일로 정리하고 launcht코드에 import가능
+    
+    [rnanosaur/nanosaur_robot](https://github.com/rnanosaur/nanosaur_robot/blob/6aaf41d00c2f95d393d942d22e35c0a3c60fdf66/nanosaur_camera/param/camera.yml)
+    
+    [mit-racecar/racecar](https://github.com/mit-racecar/racecar/blob/master/racecar/config/racecar-v2/vesc.yaml)
+    
+    - 사용 디바이스의 usb port 이름
+    - 로봇 바퀴 사이의 거리
+    - 각종 제어 변수들

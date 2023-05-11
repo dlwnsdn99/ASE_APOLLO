@@ -1,0 +1,10 @@
+#파일 관점 : 관련 라이브러리, 모델링 파일들, 설정 파일들을 모아둔 폴더
+#기능 관점 : 시뮬레이션, 하드웨어 관련, 모델링, 원격 조종 등으로 분리시킨 모듈
+#colcon build가 수행되는 빌드의 단위
+
+#패키지 생성
+#해당 방식으로 package를 만들면 빌드를 위한 기본 파일 구조를 갖게됨.
+#cba, cbp를 통해 빌드하면 검사후 build 폴더로 바로가기 생성
+$ ros2 pkg create --build-type ament_cmake  <패키지이름> --dependencies rclcpp <종속성> 
+$ ros2 pkg create --build-type ament_python <패키지이름> --dependencies rclpy <종속성>
+
