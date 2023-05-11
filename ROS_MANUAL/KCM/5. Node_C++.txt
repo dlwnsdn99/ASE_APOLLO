@@ -1,6 +1,6 @@
 $ rosfoxy
 $ cbp cpp_first_pkg
-#이렇게 입력하고 다음처럼 뜨나 확인
+
 
 # New Terminal 
 # Node 생성 후 Log 출력 예제
