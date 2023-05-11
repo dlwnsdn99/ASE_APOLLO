@@ -1,1 +1,16 @@
+# 실행
+$ ros2 run <package_name> < executable_name> 
+
+# 활성화된 서비스 목록 반환
+$ ros2 run service list : 활성화된 서비스 목록 반환
+(option)
+--t : 서비스 유형도 같이 출력
+or
+$ ros2 service type <service_name>
+
+# 특정 유형의 모든 서비스를 찾음
+$ ros2 service find<type_name> 
+
+# ros2 서비스콜
+$ ros2 service call <service_name> <service_type> <arguments> 
 
