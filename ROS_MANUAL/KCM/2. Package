@@ -14,7 +14,8 @@ $ ros2 run cpp_service_pkg robot_turning_server_node
 # ros2 run 패키지 명 서버 노드
 
 $ ros2 run cpp_service_pkg robot_turning_client_node 5 0.5 1.0
-# ros2 run 패키지 명 클라이언트 노드
+# ros2 run 패키지 명 클라이언트 노드 
+# 여기 뒤에 숫자는 순서대로 이동시간 (sec), linear vel [m/s], angular vel[rad/s]
 
 #패키지 생성방식.
 #해당 방식으로 package를 만들면 빌드를 위한 기본 파일 구조를 갖게됨.
