@@ -19,8 +19,11 @@ public:
 		// 익명함수로 대체 가능. 
 		// using 쓰면 this->LaseScan으로 바꿀 수 있는건가?
     m_sub = this->create_subscription<sensor_msgs::msg::LaserScan>(
+	    //subscriber생성 함수임. <message type>
         "skidbot/scan", 10,
+	    //subscribe topic의 이름, queue size
         std::bind(&LaserSub::sub_callback, this, std::placeholders::_1));
+	  //std:bind를 통해 감싸진 callback 함수
   }
 	//subscribe시마다 동작할 callback
 	//들어오는 데이터 : SharedPtr 형식
