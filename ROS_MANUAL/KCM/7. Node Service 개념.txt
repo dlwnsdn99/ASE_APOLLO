@@ -1,0 +1,9 @@
+Service 개념
+Topic publish -> 여러 Node가 Subscribe가능
+Service -> request가 온 대상에게만 response
+	-> 현재 작업중인 request가 처리될 대 까지 다른 request는 대기
+Topic은 지속 Publish, Service는 1회성
+
+결론
+Service : 분명한 요청의 주체가 있으며 빠르게 동작이 완료되는 경우에 사용
+Topic : 불특정한 node가 Subscribe의 대상, 지속적으로 데이터의 송수신이 일어남
