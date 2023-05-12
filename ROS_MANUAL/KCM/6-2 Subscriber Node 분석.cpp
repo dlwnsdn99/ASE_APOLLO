@@ -36,6 +36,7 @@ public:
 
 int main(int argc, char **argv) {
   rclcpp::init(argc, argv);
+  //subscriber는 반드시 spin을 통한 갱신이 있어야 최신 메시지 수신이 가능하다.
   rclcpp::spin(std::make_shared<LaserSub>());
   rclcpp::shutdown();
 
