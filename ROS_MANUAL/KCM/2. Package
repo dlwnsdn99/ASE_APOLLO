@@ -2,6 +2,20 @@
 #기능 관점 : 시뮬레이션, 하드웨어 관련, 모델링, 원격 조종 등으로 분리시킨 모듈
 #colcon build가 수행되는 빌드의 단위
 
+# Package Build
+$ cbp 패키지 명
+$ cbp cpp_service_pkg
+
+# package Run
+$ ros2 launch gcamp_gazebo gcamp_world.launch.py
+# ros2 launch 패키지 명 launch 파일 이름
+
+$ ros2 run cpp_service_pkg robot_turning_server_node
+# ros2 run 패키지 명 서버 노드
+
+$ ros2 run cpp_service_pkg robot_turning_client_node 5 0.5 1.0
+# ros2 run 패키지 명 클라이언트 노드
+
 #패키지 생성방식.
 #해당 방식으로 package를 만들면 빌드를 위한 기본 파일 구조를 갖게됨.
 #cba, cbp를 통해 빌드하면 검사후 build 폴더로 바로가기 생성
