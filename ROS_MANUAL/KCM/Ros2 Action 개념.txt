@@ -1,0 +1,23 @@
+1. action server가 response를 보내기 전까지 기다리지 않고, 다른일 가능
+2. action client은 request를 보낸 뒤에도 지속적으로 feedback 수령 가능.
+3. feedback을 받고 있다가, 이상하면 cancel 가능
+4. 하지만, 여러 request를 동시에 작업하는 것은 본질적으로 불가. ⇒ 단, MultiThreadedExecutor 로 해결 가능
+
+Action Client와 Server가 주고받는 내용
+1. Client ⇒ Server, Goal Request (service request와 유사)
+2. server ⇒ client, Goal Response
+3. client ⇒ server, Result Request
+4. server ⇒ client, Feedback Topic
+5. server ⇒ client, Result Response
+
+Action 이해
+1. 목적지 까지 이동하는도로 운전 상황
+2. 네비게이션을 보며 제대로 된 길을 가는지 확인.
+3. 네비는 경로 안내 + 잘못된 길 갈시 경로 다시 탐색 + 최적의 경로 안내 까지
+
+네비 = Action
+1. 목적지를 Request받고, 경로 검색을 마치면 안내 시작
+2. 운전 중간 계속해서 Feedback
+3. 목적지 도착시 경로 안내 종료, 다음 Request 기다림.
+->자율주행을 위한 ROS2의 Nav2라는 프로젝트가 있는데, 여기서 무조건 Action 사용함.
+https://github.com/ros-planning/navigation2/blob/713e47ff1aa3a7509ada1eb50b97267141484541/nav2_bt_navigator/include/nav2_bt_navigator/navigators/navigate_through_poses.hpp#L22
