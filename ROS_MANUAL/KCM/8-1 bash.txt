@@ -1,0 +1,19 @@
+$ ros2 run py_action_pkg fibonacci_action_server
+$ ros2 action list
+/fibonacci <- 이게 실행중 action임
+
+$ ros2 action info /fibonacci #action의 정보 조회
+Action: /fibonacci
+Action clients: 0
+Action servers: 1
+    /fibonacci_action_server
+
+$ ros2 interface show custom_interfaces/action/Fibonacci #action이 사용하는 action 타입의 상세 정보 조회
+int32 order
+---
+int32[] sequence
+---
+int32[] partial_sequence
+
+$ ros2 action send_goal --feedback fibonacci custom_interfaces/action/Fibonacci "{order: 5}" # 이러면 feedback 수령 가능
+$ ros2 run py_action_pkg fibonacci_action_server_cancel # feedback 캔슬
