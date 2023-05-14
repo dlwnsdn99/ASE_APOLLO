@@ -1,1 +1,92 @@
+간단한 게시자 및 구독자 작성
+- 노드가 topic을 통해 서로에게 문자열 메시지 형식의 데이터 전달 -
+1. ros2 pkg create --build-type ament_cmake cpp_pubsub : 패키지 생성 
+2. ros2_ws/src/cpp_pubsub/src 디렉터리로 이동
+-------------------------------------------
+게시자 노드 쓰기 
+(example)
+
+#include <chrono>              // 시간 관련 라이브러리
+#include <functional>          // 함수형 프로그래밍을 위한 라이브러리
+#include <memory>              // 스마트 포인터를 위한 라이브러리
+#include <string>              // 문자열 처리를 위한 라이브러리
+
+#include "rclcpp/rclcpp.hpp"   // ROS 2 라이브러리
+#include "std_msgs/msg/string.hpp"   // 표준 메시지 타입 중 문자열 메시지를 위한 헤더
+
+using namespace std::chrono_literals;  // std :: chrono :: milliseconds(time) 0-> one_second = 1s; 로 구능하게 한다
+
+// MinimalPublisher 클래스 선언
+class MinimalPublisher : public rclcpp::Node //MinimalPublisher 가 rclcpp :: Node를 상속한다.
+{
+  public:
+    MinimalPublisher() // 생성자
+    : Node("minimal_publisher"), count_(0)  // 노드 이름 지정 및 카운트 변수 초기화
+    {
+      // 메시지를 발행하는 publisher 생성
+      publisher_ = this->create_publisher<std_msgs::msg::String>("topic", 10);  //create_publisher는 rclcpp에 정의됨 <> 발행할 메시지 타입 적시
+      // 주기적으로 실행되는 timer 생성
+      timer_ = this->create_wall_timer(
+      500ms, std::bind(&MinimalPublisher::timer_callback, this)); // 500ms 간격으로 timer_callback() 실행
+    }
+
+  private:
+    // timer_callback() 함수 정의 메시지가 발행되거나 호출되어 처리를 수행 
+    void timer_callback()
+    {
+      auto message = std_msgs::msg::String(); // 문자열 메시지 객체 생성
+      message.data = "Hello, world! " + std::to_string(count_++); // 메시지 내용 생성
+      RCLCPP_INFO(this->get_logger(), "Publishing: '%s'", message.data.c_str()); // 로그 출력
+      publisher_->publish(message); // 메시지 발행
+    }
+    // 멤버 변수 정의
+    rclcpp::TimerBase::SharedPtr timer_; // 타이머 객체에 대한 스마트 포인터, TimerBase 클래스는 주기적으로 콜백함수를 호출하는 타이머
+    rclcpp::Publisher<std_msgs::msg::String>::SharedPtr publisher_; // 게시자 객체에 대한 스마트 포인터
+    size_t count_; 
+};
+
+// 메인 함수 정의
+int main(int argc, char * argv[])
+{
+  rclcpp::init(argc, argv);  // ROS 2 라이브러리 초기화
+  rclcpp::spin(std::make_shared<MinimalPublisher>());  // MinimalPublisher 객체 생성 및 spin() 함수 실행
+  rclcpp::shutdown();  // ROS 2 라이브러리 종료
+  return 0;
+}
+
+
+-------------------------------------------------------------------------
+구독자 노드 작성
+
+#include <memory>
+
+#include "rclcpp/rclcpp.hpp"
+#include "std_msgs/msg/string.hpp"
+using std::placeholders::_1;
+
+class MinimalSubscriber : public rclcpp::Node
+{
+  public:
+    MinimalSubscriber()
+    : Node("minimal_subscriber")
+    {
+      subscription_ = this->create_subscription<std_msgs::msg::String>(
+      "topic", 10, std::bind(&MinimalSubscriber::topic_callback, this, _1));
+    }
+
+  private:
+    void topic_callback(const std_msgs::msg::String & msg) const
+    {
+      RCLCPP_INFO(this->get_logger(), "I heard: '%s'", msg.data.c_str());
+    }
+    rclcpp::Subscription<std_msgs::msg::String>::SharedPtr subscription_;
+};
+
+int main(int argc, char * argv[])
+{
+  rclcpp::init(argc, argv);
+  rclcpp::spin(std::make_shared<MinimalSubscriber>());
+  rclcpp::shutdown();
+  return 0;
+}
 
