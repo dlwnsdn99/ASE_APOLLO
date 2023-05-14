@@ -14,3 +14,87 @@ $ ros2 service find<type_name>
 # ros2 서비스콜
 $ ros2 service call <service_name> <service_type> <arguments> 
 
+간단한 서비스 
+---------------------------------------------
+ros2 pkg create --build-type ament_cmake cpp_srvcli --dependencies rclcpp example_interfaces
+
+서비스 노드
+----------------------------------------------------------------------
+#include "rclcpp/rclcpp.hpp"
+#include "example_interfaces/srv/add_two_ints.hpp" // addtwoints 서비스 타입을 사용, a,b 두개의 정수를 받아서 더한 값을 반환
+
+#include <memory>
+
+void add(const std::shared_ptr<example_interfaces::srv::AddTwoInts::Request> request,
+          std::shared_ptr<example_interfaces::srv::AddTwoInts::Response>      response) // 서비스 콜백함수
+{
+  response->sum = request->a + request->b;
+  RCLCPP_INFO(rclcpp::get_logger("rclcpp"), "Incoming request\na: %ld" " b: %ld",
+                request->a, request->b);
+  RCLCPP_INFO(rclcpp::get_logger("rclcpp"), "sending back response: [%ld]", (long int)response->sum);
+}
+
+int main(int argc, char **argv)
+{
+  rclcpp::init(argc, argv);
+
+  std::shared_ptr<rclcpp::Node> node = rclcpp::Node::make_shared("add_two_ints_server"); // add_two_ints_server 라는 이름의 노드를 생성
+
+  rclcpp::Service<example_interfaces::srv::AddTwoInts>::SharedPtr service =
+    node->create_service<example_interfaces::srv::AddTwoInts>("add_two_ints", &add); //add_two_ints라는 이름의 서비스를 생성
+
+  RCLCPP_INFO(rclcpp::get_logger("rclcpp"), "Ready to add two ints.");
+
+  rclcpp::spin(node);
+  rclcpp::shutdown();
+}
+
+클라이언트 노드
+--------------------------------
+#include "rclcpp/rclcpp.hpp"
+#include "example_interfaces/srv/add_two_ints.hpp"
+
+#include <chrono>
+#include <cstdlib>
+#include <memory>
+
+using namespace std::chrono_literals;
+
+int main(int argc, char **argv)
+{
+  rclcpp::init(argc, argv);
+/* 명령행 인수로 전달된 인자의 개수가 2개가 아닌 경우 프로그램 종료*/
+  if (argc != 3) { 
+      RCLCPP_INFO(rclcpp::get_logger("rclcpp"), "usage: add_two_ints_client X Y"); 
+      return 1;
+  }
+
+  std::shared_ptr<rclcpp::Node> node = rclcpp::Node::make_shared("add_two_ints_client"); // 노드 생성
+  rclcpp::Client<example_interfaces::srv::AddTwoInts>::SharedPtr client =
+    node->create_client<example_interfaces::srv::AddTwoInts>("add_two_ints");  // 서비스 클라이언트 생성
+
+  auto request = std::make_shared<example_interfaces::srv::AddTwoInts::Request>(); // 객체 생성
+  request->a = atoll(argv[1]); //a를 파싱한 값을 대입한다.
+  request->b = atoll(argv[2]);
+/*서비스 서버가 실행 될 떄까지 기다린다.*/
+  while (!client->wait_for_service(1s)) {
+    if (!rclcpp::ok()) {
+      RCLCPP_ERROR(rclcpp::get_logger("rclcpp"), "Interrupted while waiting for the service. Exiting.");
+      return 0;
+    }
+    RCLCPP_INFO(rclcpp::get_logger("rclcpp"), "service not available, waiting again...");
+  }
+
+  auto result = client->async_send_request(request);
+  // 비동기식ㅇ로 서비스 요청을 전송
+  if (rclcpp::spin_until_future_complete(node, result) ==
+    rclcpp::FutureReturnCode::SUCCESS)
+  {
+    RCLCPP_INFO(rclcpp::get_logger("rclcpp"), "Sum: %ld", result.get()->sum);
+  } else {
+    RCLCPP_ERROR(rclcpp::get_logger("rclcpp"), "Failed to call service add_two_ints");
+  }
+
+  rclcpp::shutdown();
+  return 0;
+}
