@@ -3,7 +3,7 @@
 1. ros2 pkg create --build-type ament_cmake cpp_pubsub : 패키지 생성 
 2. ros2_ws/src/cpp_pubsub/src 디렉터리로 이동
 -------------------------------------------
-게시자 노드 쓰기 
+게시자(Publisher) 노드 쓰기 
 (example)
 
 #include <chrono>              // 시간 관련 라이브러리
@@ -26,8 +26,7 @@ class MinimalPublisher : public rclcpp::Node //MinimalPublisher 가 rclcpp :: No
       // 메시지를 발행하는 publisher 생성
       publisher_ = this->create_publisher<std_msgs::msg::String>("topic", 10);  //create_publisher는 rclcpp에 정의됨 <> 발행할 메시지 타입 적시
       // 주기적으로 실행되는 timer 생성
-      timer_ = this->create_wall_timer(
-      500ms, std::bind(&MinimalPublisher::timer_callback, this)); // 500ms 간격으로 timer_callback() 실행
+      timer_ = this->create_wall_timer(500ms, std::bind(&MinimalPublisher::timer_callback, this)); // 500ms 간격으로 timer_callback() 실행
     }
 
   private:
@@ -56,12 +55,13 @@ int main(int argc, char * argv[])
 
 
 -------------------------------------------------------------------------
-구독자 노드 작성
+구독자(Subscriber) 노드 작성
 
 #include <memory>
 
 #include "rclcpp/rclcpp.hpp"
 #include "std_msgs/msg/string.hpp"
+
 using std::placeholders::_1;
 
 class MinimalSubscriber : public rclcpp::Node
@@ -89,4 +89,3 @@ int main(int argc, char * argv[])
   rclcpp::shutdown();
   return 0;
 }
-
