@@ -1,21 +1,22 @@
  Topic = Publisher(발행자)와 Subscriber(구독자)로 나뉜 송수신자들이 전달하는 Message(데이터)가 오가는 Bus
 - topic은 1:n 
 ----------------------------------------------------------------------------
-#Node 토글에 보면 node 리스트랑 형식 보는 명령어 있는데, 그거 보면 발행자 구독자 등등 다 볼 수 있음
+# Node 토글에 보면 node 리스트랑 형식 보는 명령어 있는데, 그거 보면 발행자 구독자 등등 다 볼 수 있음
 
-#실행중 토픽 리스트 확인
+# 실행중 토픽 리스트 확인
 $ ros2 topic list
 
 # 토픽 정보
 $ ros2 topic info <topic_nmae>
+--> $ ros2 topic info <topic_name> 아님???
 
 # topic 메시지 type 
 $ ros2 interface show <msg type>
 
-#topic 데이터 게시
+# topic 데이터 게시(Publish)
 $ ros2 topic echo <topic_name>
 
-#커맨드 이용해서 publish 방식은 아래 참고
+# 커맨드 이용해서 publish 방식은 아래 참고
 $ ros2 topic pub <topic_name> <msg_type> '<args>' //args 인수는 yaml 구문의 실제 구조
 (option)
 -- once : 한번만 실행 
