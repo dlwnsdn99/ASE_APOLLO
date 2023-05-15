@@ -16,92 +16,34 @@ $ https://developer.nvidia.com/jetpack-sdk-463
 NVIDIA L4T는 부트로더, Linux 커널 4.9, 필수 펌웨어, NVIDIA 드라이버, Ubuntu 18.04 기반 샘플 파일 시스템 등을 제공합니다.
 
 ### TensorRT
-TensorRT 는 이미지 분류, 분할 및 객체 감지 신경망을 위한 고성능 딥 러닝 추론 런타임입니다.
-TensorRT는 NVIDIA의 병렬 프로그래밍 모델인 CUDA를 기반으로 하며 모든 딥 러닝 프레임워크에 대한 추론을 최적화할 수 있습니다.
-여기에는 딥 러닝 추론 애플리케이션을 위한 낮은 대기 시간과 높은 처리량을 제공하는 딥 러닝 추론 최적화 프로그램 및 런타임이 포함됩니다.
-
-JetPack 4.6.1에는 TensorRT 8.2.1이 포함되어 있습니다.
-
-### cuDNN
-CUDA Deep Neural Network 라이브러리는 딥 러닝 프레임워크를 위한 고성능 프리미티브를 제공합니다.
-순방향 및 역방향 컨벌루션, 풀링, 정규화 및 활성화 계층과 같은 표준 루틴에 대해 고도로 조정된 구현을 제공합니다.
-
-JetPack 4.6.1에는 cuDNN 8.2.1이 포함되어 있습니다.
+#### 딥러닝 추론 전용 런타임 엔진
+#### 일반 프레임워크 대비 빠른 추론 실행
+#### ONNX 통한 다양한 네트워크 엔진 변환 지원
+#### JetPack 4.6.1에는 TensorRT 8.2.1이 포함되어 있습니다.
 
 ### CUDA
-CUDA 툴킷은 GPU 가속 응용 프로그램을 구축하는 C 및 C++ 개발자를 위한 포괄적인 개발 환경을 제공합니다.
-이 툴킷에는 NVIDIA GPU용 컴파일러, 수학 라이브러리, 애플리케이션의 성능을 디버깅하고 최적화하기 위한 도구가 포함되어 있습니다.
+#### GPU 가속 에플리케이션
+#### CUDA 개발 환경 및 개발도구 제공
+#### JetPack 4.6.1에는 CUDA 10.2가 포함되어 있습니다.
 
-JetPack 4.6.1에는 CUDA 10.2가 포함되어 있습니다.
+### cuDNN
+#### CUDA 가속 기반의 Deep Neural Network 라이브러리 제공 
+#### JetPack 4.6.1에는 cuDNN 8.2.1이 포함되어 있습니다.
 
-### Multimedia API
-Jetson Multimedia API 패키지는 유연한 애플리케이션 개발을 위한 저수준 API를 제공합니다.
-카메라 애플리케이션 API: libargus는 프레임당 카메라 매개변수 제어, 다중(동기화 포함) 카메라 지원 및 EGL 스트림 출력과 함께 카메라 애플리케이션을 위한
-저수준 프레임 동기식 API를 제공합니다. ISP가 필요한 RAW 출력 CSI 카메라는 libargus 또는 GStreamer 플러그인과 함께 사용할 수 있습니다.
-두 경우 모두 V4L2 미디어 컨트롤러 센서 드라이버 API가 사용됩니다.
-센서 드라이버 API: V4L2 API는 비디오 디코딩, 인코딩, 형식 변환 및 스케일링 기능을 지원합니다. 
-인코딩을 위한 V4L2는 비트 전송률 제어, 품질 사전 설정, 낮은 대기 시간 인코딩, 시간 트레이드 오프, 모션 벡터 맵 등과 같은 많은 기능을 제공합니다.
-
-JetPack 4.6.1에는 다음과 같은 멀티미디어 기능이 포함되어 있습니다.
-
-SVC(Scalable Video Coding) H.264 인코딩 지원
-YUV444 8, 10비트 인코딩 및 디코딩 지원
+### MMAPI (Multimedia API)
+#### 카메라, 비디오, 인코딩 등의 멀티미디어 기능을 위한 로우레벨 제어 API와 버퍼 관리 기능 제공
+#### JetPack 4.6.1에는 다음과 같은 멀티미디어 기능이 포함되어 있습니다.
+#### SVC(Scalable Video Coding) H.264 인코딩 지원
+#### YUV444 8, 10비트 인코딩 및 디코딩 지원
 
 ### Computer Vision
-VPI(Vision Programing Interface) 는 PVA 1 (Programmable Vision Accelerator), GPU 및 CPU 에 구현된 컴퓨터 비전/이미지 처리 알고리즘을 제공하는 소프트웨어 라이브러리입니다.
+#### OpenCV : GPU가속 지원이 가능한 오픈소스 컴퓨터 비전 라이브러리
+#### JetPack 4.6.1에는 OpenCV 4.1.1이 포함되어 있습니다.
 
-OpenCV는 컴퓨터 비전, 이미지 처리 및 기계 학습을 위한 선도적인 오픈 소스 라이브러리입니다.
+#### VPI(Vision Programing Interface) : 엔비디아 하드웨어 가속 기반의 컴퓨터 비전 기능 및 이미지 프로세싱 알고리즘 제공 
+#### JetPack 4.6.1에는 VPI 1.2가 포함되어 있습니다.
 
-VisionWorks 2 는 컴퓨터 비전(CV) 및 이미지 처리를 위한 소프트웨어 개발 패키지입니다.
-
-JetPack 4.6.1에는 VPI 1.2가 포함되어 있습니다.
-
-Python 바인딩에 대한 프로덕션 품질 지원
-작업을 병렬화하기 위해 여러 스트림을 생성할 수 있도록 Python 바인딩에서 다중 스트림 지원
-VPI 스트림에서 Python 스크립트 호출 지원
-새로운 알고리즘
-CPU 및 GPU 백엔드의 Image Erode\Dilate 알고리즘
-CPU 및 GPU 백엔드의 이미지 최소\최대 위치 알고리즘
-JetPack 4.6.1에는 OpenCV 4.1.1이 포함되어 있습니다.
-
-Jetpack 4.6.1에는 VisionWorks 1.6이 포함되어 있습니다.
-
-### Developer Tools
-CUDA 툴킷은 CUDA 라이브러리로 고성능 GPU 가속 응용 프로그램을 구축하는 C 및 C++ 개발자를 위한 포괄적인 개발 환경을 제공합니다.
-이 툴킷에는 Nsight Eclipse Edition, Nsight Compute를 포함한 디버깅 및 프로파일링 도구, 애플리케이션 간 컴파일을 위한 도구 체인이 포함되어 있습니다.
-
-NVIDIA Nsight 시스템은 개발자가 소프트웨어 성능을 분석하고 최적화하는 데 필요한 통찰력을 제공하는 오버헤드가 낮은 시스템 전체 프로파일링 도구입니다.
-
-NVIDIA Nsight Graphics는 그래픽 애플리케이션 디버깅 및 프로파일링을 위한 독립 실행형 애플리케이션입니다.
-
-JetPack 4.6.1에는 NVIDIA Nsight Systems 2021.5가 포함되어 있습니다.
-JetPack 4.6.1에는 NVIDIA Nsight Graphics 2021.2가 포함되어 있습니다.
 
 ### Supported SDKs and Tools
-NVIDIA DeepStream SDK는 AI 기반 다중 센서 처리 및 비디오 및 오디오 이해를 위한 완벽한 분석 툴킷입니다.
-
-DeepStream SDK 6.0은 JetPack 4.6.1을 지원합니다.
-
-NVIDIA Triton™ 추론 서버는 규모에 맞게 AI 모델 배포를 간소화합니다.
-Triton Inference Server는 오픈 소스이며 Jetson의 NVIDIA TensorRT, TensorFlow 및 ONNX Runtime에서 훈련된 AI 모델의 배포를 지원합니다.
-Jetson에서 Triton Inference Server는 C API와의 직접 통합을 위한 공유 라이브러리로 제공됩니다.
-
-PowerEstimator는 맞춤형 전원 모드 프로필 생성을 간소화하고 Jetson 모듈 전력 소비량을 예측하는 웹앱입니다.
-
-PowerEstimator v1.1은 JetPack 4.6을 지원합니다 .
-
-### Cloud Native
-Jetson은 클라우드 네이티브를 엣지에 도입하고 컨테이너 및 컨테이너 오케스트레이션과 같은 기술을 지원합니다.
-NVIDIA JetPack에는 Docker가 통합된 NVIDIA Container Runtime이 포함되어 있어 Jetson 플랫폼에서 GPU 가속 컨테이너화 애플리케이션을 사용할 수 있습니다.
-
-NVIDIA는 NVIDIA NGC 에서 Jetson을 위한 여러 컨테이너 이미지를 호스팅합니다 .
-일부는 샘플 및 문서가 포함된 소프트웨어 개발에 적합하고 다른 일부는 런타임 구성 요소만 포함하는 프로덕션 소프트웨어 배포에 적합합니다.
-Jetson의 Cloud-Native 페이지 에서 자세한 정보와 모든 컨테이너 이미지 목록을 찾아보세요 .
-
-### Security
-NVIDIA Jetson 모듈에는 하드웨어 RoT(Root of Trust), 보안 부팅, 하드웨어 암호화 가속, 신뢰할 수 있는 실행 환경, 디스크 및 메모리 암호화,
-물리적 공격 보호 등 다양한 보안 기능이 포함되어 있습니다. Jetson Linux 개발자 가이드의 보안 섹션으로 이동하여 보안 기능에 대해 알아보세요.
-
-### Functional Safety
-기능 안전에 대한 NVIDIA Jetson 접근 방식은 안전 관련 시스템 설계의 맥락에서 사용할 수 있는 하드웨어 오류 진단 기반에 대한 액세스를 제공하는 것입니다.
-JSEP(Jetson Safety Extension Package)는 안전 기능을 구현하고 기능 안전 표준 준수를 달성하기 위한 오류 진단 및 오류 보고 프레임워크를 제공합니다.
+#### NVIDIA DeepStream SDK는 AI 기반 다중 센서 처리 및 비디오 및 오디오 이해를 위한 완벽한 분석 툴킷입니다.
+#### DeepStream SDK 6.0은 JetPack 4.6.1을 지원합니다.
