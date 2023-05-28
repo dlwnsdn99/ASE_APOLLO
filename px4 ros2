@@ -2,6 +2,11 @@ https://github.com/Jaeyoung-Lim/px4-offboard/blob/master/doc/ROS2_PX4_Offboard_T
 =====================================================================================================
 추가(설치 순서)
 - CMake v3.5, ROS2, QGC, PX4-Autopilot v1.14 순으로 설치
+------------------------------------------------------------
+PX-Autopilot v1.14 설치 방법
+sudo apt install git
+git clone https://github.com/PX4/PX4-Autopilot.git --recursive
+bash ./PX4-Autopilot/Tools/setup/ubuntu.sh
 -------------------------------------------------------------------------------------------------
 https://fast-dds.docs.eprosima.com/en/latest/installation/sources/sources_linux.html#linux-sources
 -------------------------------------------------------------------------------------------------1. g++, pip3, wget, git 설치
