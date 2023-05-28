@@ -25,7 +25,7 @@ direction_str_dict = {0: 'Up', 1: 'Right', 2: 'Down', 3: 'Left'}  # 이동 방�
 class ApolloActionServer(Node):
 
     def __init__(self):
-        super().__init__('action_server') #우리가 사용할 변수명으로 바꾸면 됨
+        super().__init__('action_server') #server 노드명
 
         self.yaw = 0.0
         self.forward_distance = 0.0
