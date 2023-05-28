@@ -1,1 +1,30 @@
 https://github.com/Jaeyoung-Lim/px4-offboard/blob/master/doc/ROS2_PX4_Offboard_Tutorial.md
+=====================================================================================================
+추가(설치 순서)
+- CMake v3.5, ROS2, QGC, PX4-Autopilot v1.14 순으로 설치
+-------------------------------------------------------------------------------------------------
+https://fast-dds.docs.eprosima.com/en/latest/installation/sources/sources_linux.html#linux-sources
+-------------------------------------------------------------------------------------------------
+1. g++, pip3, wget, git 설치
+2. 종속성 설치
+- Asio 및 TinyXML2 라이브러리
+- OpenSSL
+- Libp11 및 SoftHSM 라이브러리
+3. Colcon 설치
+4. 푸나단 메모리 설치
+5. Fast CDR
+6. eProsima Fast DDS 설치
+-------------------------------------------------------------------------------------------------
+https://kwangpil.tistory.com/110
+-------------------------------------------------------------------------------------------------
+7. 자바 설치 (생략 가능)
+8. curl 설치(sdkman을 설치하기 위해 설치)
+	(네트워크를 통해 데이터를 전송하고 받는 기능을 제공)
+9. sdkman 설치(Fast-FTPS-Gen을 빌드하기 위해 Gradle을 설치해야 하는데 설치 시 sdkman으로 Gradle 설치를 권고하기 때문에 sdkman을 먼저 설치해야 한다.)
+10. Gradle 설치
+11. Fast-FTPS-Gen 빌드
+12. SITL 타깃 용 펌웨어 빌드
+13. SITL 코드 빌드
+14. micrortps_agent 빌드
+15. make px4_sitl_rtps gazebo 실행
+16. micrortps_agent 실행
