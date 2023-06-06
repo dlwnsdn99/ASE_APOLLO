@@ -27,7 +27,7 @@ $ sudo apt install ros-dev-tools
 $ source /opt/ros/foxy/setup.bash
 
 #매번 source /opt...를 매번 입력하기 싫다면 아래와 같이 입력
-echo "source /opt/ros/rolling/setup.bash" >> ~/.bashrc
+echo "source /opt/ros/foxy/setup.bash" >> ~/.bashrc
 
 #설치 확인 차 테스트 진행
 
